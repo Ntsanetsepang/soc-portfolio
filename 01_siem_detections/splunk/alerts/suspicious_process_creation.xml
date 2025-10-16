@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry>
+  <title>Suspicious Process Creation Alert</title>
+  <content type="text">
+    <s:dict xmlns:s="http://dev.splunk.com/ns/rest" xmlns:unescaped="http://xml.apache.org/xml/features/disallow-doctype-decl">
+      <s:key name="actions">
+        <s:dict>
+          <s:key name="email">
+            <s:dict>
+              <s:key name="message">
+                <s:dict>
+                  <s:key name="alert">Suspicious process creation detected on $result.Computer$. Process: $result.NewProcessName$ was created by $result.ParentProcessName$ with user $result.Account_Name$.</s:key>
+                  <s:key name="inline">1</s:key>
+                  <s:key name="subject">ALERT: Suspicious Process Creation Detected</s:key>
+                </s:dict>
+              </s:key>
+              <s:key name="priority">high</s:key>
+              <s:key name="to">soc@example.com</s:key>
+            </s:dict>
+          </s:key>
+          <s:key name="notable">
+            <s:dict>
+              <s:key name="param">
+                <s:dict>
+                  <s:key name="rule_description">This alert triggers when a process is created from a non-standard Windows directory, which could indicate malicious activity.</s:key>
+                  <s:key name="rule_title">Suspicious Process Creation</s:key>
+                  <s:key name="security_domain">endpoint</s:key>
+                  <s:key name="severity">high</s:key>
+                </s:dict>
+              </s:key>
+            </s:dict>
+          </s:key>
+        </s:dict>
+      </s:key>
+      <s:key name="alert_type">number of events</s:key>
+      <s:key name="cron_schedule">*/15 * * * *</s:key>
+      <s:key name="description">This alert detects process creation events where the process is not being launched from standard Windows directories, which could indicate malicious activity.</s:key>
+      <s:key name="disabled">0</s:key>
+      <s:key name="dispatch.earliest_time">-15m</s:key>
+      <s:key name="dispatch.latest_time">now</s:key>
+      <s:key name="display.general.timeRangePicker.show">0</s:key>
+      <s:key name="display.general.type">statistics</s:key>
+      <s:key name="display.page.search.mode">verbose</s:key>
+      <s:key name="display.page.search.tab">statistics</s:key>
+      <s:key name="display.statistics.format">color</s:key>
+      <s:key name="enableSched">1</s:key>
+      <s:key name="is_scheduled">1</s:key>
+      <s:key name="is_visible">1</s:key>
+      <s:key name="max_concurrent">1</s:key>
+      <s:key name="realtime_schedule">0</s:key>
+      <s:key name="request.ui_dispatch_app">search</s:key>
+      <s:key name="request.ui_dispatch_view">search</s:key>
+      <s:key name="search">index=windows sourcetype=WinEventLog:Security EventCode=4688 
+| where NOT match(NewProcessName, "(?i)C:\\\\Windows\\\\System32\\\\.*") 
+| where NOT match(NewProcessName, "(?i)C:\\\\Program Files\\\\.*") 
+| where NOT match(NewProcessName, "(?i)C:\\\\Program Files \(x86\)\\\\.*") 
+| stats count by NewProcessName, Creator_Process_ID, ParentProcessName, Account_Name, Computer
+| where count > 1
+| sort - count</s:key>
+      <s:key name="schedule_priority">default</s:key>
+      <s:key name="schedule_window">auto</s:key>
+      <s:key name="action.email.useNSSubject">1</s:key>
+      <s:key name="action.notable">1</s:key>
+      <s:key name="action.email">1</s:key>
+      <s:key name="action.email.inline">1</s:key>
+      <s:key name="action.email.sendresults">1</s:key>
+      <s:key name="alert.severity">3</s:key>
+      <s:key name="alert.suppress">0</s:key>
+      <s:key name="alert.track">1</s:key>
+      <s:key name="counttype">number of events</s:key>
+      <s:key name="relation">greater than</s:key>
+      <s:key name="quantity">0</s:key>
+    </s:dict>
+  </content>
+</entry>

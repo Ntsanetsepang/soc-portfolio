@@ -1,0 +1,51 @@
+# Network Connections Log (Sanitized)
+# Extracted from compromised host during incident IR-2023-0315
+# Timestamp: 2023-03-15T15:45:00Z
+
+# Local connections at time of incident
+# Format: Protocol LocalAddress:Port ForeignAddress:Port State PID ProcessName
+
+TCP 192.168.1.45:49223 203.0.113.45:443 ESTABLISHED 4588 svchost.exe
+TCP 192.168.1.45:49224 203.0.113.45:443 ESTABLISHED 4588 svchost.exe
+TCP 192.168.1.45:49225 198.51.100.72:443 ESTABLISHED 4588 svchost.exe
+TCP 192.168.1.45:49226 192.168.1.10:445 ESTABLISHED 4588 svchost.exe
+TCP 192.168.1.45:49227 192.168.1.20:445 ESTABLISHED 4588 svchost.exe
+TCP 192.168.1.45:3389 192.168.1.100:52134 ESTABLISHED 2456 svchost.exe
+TCP 192.168.1.45:5985 192.168.1.20:49322 ESTABLISHED 3344 svchost.exe
+TCP 0.0.0.0:135 0.0.0.0:0 LISTENING 728 svchost.exe
+TCP 0.0.0.0:445 0.0.0.0:0 LISTENING 4 System
+TCP 0.0.0.0:3389 0.0.0.0:0 LISTENING 1056 svchost.exe
+TCP 0.0.0.0:5985 0.0.0.0:0 LISTENING 4 System
+TCP 0.0.0.0:49664 0.0.0.0:0 LISTENING 504 lsass.exe
+TCP 0.0.0.0:49665 0.0.0.0:0 LISTENING 508 wininit.exe
+TCP 0.0.0.0:49666 0.0.0.0:0 LISTENING 996 svchost.exe
+TCP 0.0.0.0:49667 0.0.0.0:0 LISTENING 988 svchost.exe
+TCP 0.0.0.0:49668 0.0.0.0:0 LISTENING 1712 spoolsv.exe
+TCP 0.0.0.0:49669 0.0.0.0:0 LISTENING 656 services.exe
+
+# DNS Queries (Last 10 minutes before isolation)
+# Format: Timestamp QueryName QueryType ResponseIP
+
+2023-03-15T15:35:12Z update-service.com A 203.0.113.45
+2023-03-15T15:36:45Z cdn-storage.net A 198.51.100.72
+2023-03-15T15:37:22Z secure-download.org A 203.0.113.45
+2023-03-15T15:38:10Z microsoft.com A 20.112.250.133
+2023-03-15T15:39:05Z update-service.com A 203.0.113.45
+2023-03-15T15:40:12Z cdn-storage.net A 198.51.100.72
+2023-03-15T15:41:33Z dc01.internal.company.com A 192.168.1.10
+2023-03-15T15:42:15Z fileserver.internal.company.com A 192.168.1.20
+2023-03-15T15:43:22Z update-service.com A 203.0.113.45
+2023-03-15T15:44:05Z secure-download.org A 203.0.113.45
+
+# HTTP/HTTPS Traffic Summary (Sanitized)
+# Format: Timestamp Method URL ResponseCode ResponseSize
+
+2023-03-15T15:30:05Z GET https://update-service.com/check 200 1458
+2023-03-15T15:31:12Z POST https://update-service.com/report 200 532
+2023-03-15T15:32:45Z POST https://cdn-storage.net/upload 200 1024
+2023-03-15T15:35:22Z POST https://update-service.com/data 200 2048
+2023-03-15T15:37:10Z POST https://secure-download.org/store 200 5120
+2023-03-15T15:38:33Z POST https://update-service.com/data 200 10240
+2023-03-15T15:40:15Z POST https://cdn-storage.net/upload 200 524288
+2023-03-15T15:42:22Z POST https://secure-download.org/store 200 1048576
+2023-03-15T15:44:05Z POST https://update-service.com/data 200 1572864

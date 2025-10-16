@@ -1,0 +1,12 @@
+# Network Capture Placeholder
+
+This is a placeholder file for a network capture (PCAP) file that would contain sanitized network traffic related to the incident.
+
+In a real portfolio, this would be a sanitized PCAP file showing relevant network traffic from the incident, with sensitive information removed.
+
+Example information that might be included in an actual PCAP:
+- C2 traffic patterns
+- Beaconing activity
+- HTTP/HTTPS requests to malicious domains
+- DNS queries to malicious domains
+- Data exfiltration attempts (sanitized)

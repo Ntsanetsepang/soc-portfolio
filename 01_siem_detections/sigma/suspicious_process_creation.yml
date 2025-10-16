@@ -1,0 +1,37 @@
+title: Suspicious Process Creation From Unusual Locations
+id: 5f4f4a5a-4c3a-4f3a-b2b1-8c3a4f5b6c7d
+status: experimental
+description: Detects process creation from non-standard Windows directories, which could indicate malicious activity
+author: Your Name
+date: 2023/01/15
+modified: 2023/01/15
+references:
+    - https://attack.mitre.org/techniques/T1036/
+    - https://attack.mitre.org/techniques/T1059/
+tags:
+    - attack.execution
+    - attack.t1059
+    - attack.defense_evasion
+    - attack.t1036
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection:
+        Image|startswith:
+            - 'C:\Users\'
+            - 'C:\ProgramData\'
+            - 'C:\Windows\Temp\'
+            - 'C:\Temp\'
+            - 'C:\PerfLogs\'
+    filter:
+        Image|startswith:
+            - 'C:\Windows\System32\'
+            - 'C:\Windows\SysWOW64\'
+            - 'C:\Program Files\'
+            - 'C:\Program Files (x86)\'
+    condition: selection and not filter
+falsepositives:
+    - Software installations from non-standard locations
+    - Custom scripts and tools run from user directories
+level: medium

@@ -1,0 +1,5 @@
+# Resume Placeholder
+
+This is a placeholder file. Please replace this with your actual resume.pdf file.
+
+Note: The system cannot create actual PDF files, so you'll need to manually create and add your resume in PDF format.
